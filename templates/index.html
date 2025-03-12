@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora en Flask</title>
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Calculadora en Flask</h2>
+        <form action="/calcular" method="post" class="calculator">
+            <label for="num1">Número 1:</label>
+            <input type="number" name="num1" placeholder="Ingresa un número" required>
+
+            <label for="num2">Número 2:</label>
+            <input type="number" name="num2" placeholder="Ingresa otro número" required>
+
+            <div class="button-group">
+                <button type="submit" name="operation" value="suma">Sumar</button>
+                <button type="submit" name="operation" value="resta">Restar</button>
+                <button type="submit" name="operation" value="multiplicacion">Multiplicar</button>
+                <button type="submit" name="operation" value="division">Dividir</button>
+            </div>
+        </form>
+        {% if resultado is not none %}
+        <h3> resultado: {{resultado}}</h3>
+        {% endif %}
+    </div>
+
+
+</body>
+
+</html>

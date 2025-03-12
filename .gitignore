@@ -1,0 +1,17 @@
+# Archivos y carpetas de Python
+__pycache__/
+*.pyc
+*.pyo
+*.log
+
+# Archivos de entorno virtual
+venv/
+.venv/
+env/
+
+# Configuraciones de editores de código
+.vscode/
+.idea/
+
+# Variables de entorno
+.env
