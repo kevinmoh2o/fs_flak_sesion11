@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,9 +11,9 @@
 <body>
     <div class="main-container">
         <h2>Registrar Cita Médica</h2>
-        <form action="/view_register_appointment" method="POST">
+        <form action="/register" method="POST">
 
-            
+
             <div class="input-group">
                 <input type="text" name="name" id="name" required>
                 <label for="name">Nombre</label>
@@ -32,12 +33,12 @@
                 <select name="speciality" id="speciality" required>
                     <option value="" disabled selected></option>
                     {% for key, value in specialties.items() %}
-                        <option value="{{ key }}">{{ value }}</option>
+                    <option value="{{ key }}">{{ value }}</option>
                     {% endfor %}
                 </select>
                 <label for="speciality">Especialidad</label>
             </div>
-            
+
 
             <div class="input-group">
                 <input type="date" name="date" id="date" required>
@@ -56,6 +57,21 @@
 
             <button type="submit">Enviar Cita</button>
         </form>
+        {% if appointment is not none %}
+        <div class="summary-container">
+            <h3>Resumen de la Cita</h3>
+            <p><strong>Nombre:</strong> {{ appointment.name }}</p>
+            <p><strong>Correo Electrónico:</strong> {{ appointment.email }}</p>
+            <p><strong>Teléfono:</strong> {{ appointment.phone }}</p>
+            <p><strong>Especialidad:</strong> {{ appointment.speciality }}</p>
+            <p><strong>Fecha:</strong> {{ appointment.date }}</p>
+            <p><strong>Hora:</strong> {{ appointment.time }}</p>
+            <p><strong>Síntomas:</strong> {{ appointment.symptoms }}</p>
+        </div>
+        {% endif %}
+
+
     </div>
 </body>
+
 </html>

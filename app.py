@@ -8,29 +8,45 @@ app = Flask(__name__)
 def index():
     return render_template('index.html',resultado = None)
 
-@app.route('/view_register_appointment', methods=['GET', 'POST'])
-def viewRegistering():
-    if request.method == 'POST':
-        try:
-            name = request.form["name"]
-            specialty = request.form["specialty"]
-            date = request.form["date"]
-            time = request.form["time"]
 
-            message = "Cita registrada correctamente"
-            appointment_data = {
-                "name": name,
-                "specialty": specialty,
-                "date": date,
-                "time": time
-            }
-        except:
-            message = "Error al registrar la cita"
-            appointment_data = None
-        
+@app.route('/view_register_appointment', methods=['GET'])
+def viewRegistering():
+    return render_template('appointments-register.html', specialties=MedicalSpecialties.get_specialties(),message=None, appointment=None)
+
+
+
+@app.route('/register', methods=['POST'])
+def makeRegisterEfective():
+    try:
+        print(request.form["name"])  # Verifica si Flask recibe datos
+        name = request.form["name"]
+        phone = request.form["phone"]
+        email = request.form["email"]
+        speciality = request.form["speciality"]
+        date = request.form["date"]
+        time = request.form["time"]
+        symptoms = request.form["symptoms"]
+
+        message = "Cita registrada correctamente"
+        appointment_data = {
+            "name": name,
+            "phone": phone,
+            "email": email,
+            "speciality": speciality,
+            "date": date,
+            "time": time,
+            "symptoms": symptoms
+        }
         return render_template('appointments-register.html', specialties=MedicalSpecialties.get_specialties(), message=message, appointment=appointment_data)
 
-    return render_template('appointments-register.html', specialties=MedicalSpecialties.get_specialties())
+    except Exception as e:
+        print(f"Error: {e}")  # Imprime el error en la consola para depuración
+        message = "Error al registrar la cita"
+        return render_template('appointments-register.html', specialties=MedicalSpecialties.get_specialties(), message=message)
+
+    
+    
+
 
 
 @app.route('/calcular', methods=['POST'])
